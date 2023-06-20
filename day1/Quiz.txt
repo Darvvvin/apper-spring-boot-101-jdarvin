@@ -1,0 +1,14 @@
+1. Enterprise
+2. Boilerplate code is redundant code or code that is saying so much to do common tasks (getters, setters etc.). The goal is to reduce this code so code is more readable and debuggable
+3. Spring Framework / Spring Core
+4. Pivotal
+5. https://start.spring.io/
+6. Standalone springboot web applications are accessible through ports (default: 8080) and make use of local APIs and services that can be created through the springboot framework.
+
+7. 
+8.
+9.
+
+Dependency injection is where the spring container injects objects into other objects to fullfil the features the other object needs in order for it to work. This makes objects and classes  more modular and decoupled which helps in developing well-written code / applications.
+
+10. mvn spring-boot:run
