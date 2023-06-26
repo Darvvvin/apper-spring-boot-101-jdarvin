@@ -10,7 +10,7 @@ import java.util.UUID;
 @Service
 public class AccountService {
 
-    private List<Account> accounts = new ArrayList<>();
+    private final List<Account> accounts = new ArrayList<>();
 
     public Account create(String firstName, String lastName, String username, String clearPassword) {
         Account account = new Account();
