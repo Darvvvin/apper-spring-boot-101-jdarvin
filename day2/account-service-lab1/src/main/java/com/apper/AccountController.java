@@ -62,6 +62,13 @@ public class AccountController {
         return createUpdateAccountResponse(account);
     }
 
+    // Delete Account
+    @DeleteMapping("{accountId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAccount(@PathVariable String accountId) {
+        accountService.delete(accountId);
+    }
+
     private GetAccountResponse createGetAccountResponse(Account account) {
 
         GetAccountResponse response = new GetAccountResponse();
@@ -81,4 +88,5 @@ public class AccountController {
 
         return response;
     }
+
 }

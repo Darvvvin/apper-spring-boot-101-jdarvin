@@ -71,4 +71,8 @@ public class AccountService {
 
         return account;
     }
+
+    public void delete(String accountId) {
+        accounts.remove(get(accountId));
+    }
 }
