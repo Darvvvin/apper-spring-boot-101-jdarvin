@@ -1,10 +1,19 @@
 package com.jacob;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-@RestController // Controller for a REST API
-@RequestMapping("account") // Paano mamamap yung request, "account" ay yung recipient ng request
+import java.util.ArrayList;
+import java.util.List;
+
+@RestController
+@RequestMapping("account")
 public class AccountController {
 
     private final AccountService accountService;
@@ -16,7 +25,7 @@ public class AccountController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CreateAccountResponse createAccount(@RequestBody CreateAccountRequest request) {
-        Account account = accountService.create(request.getFirstName(), request.getLastName(), request.getEmail(), request.getPassword());
+        Account account= accountService.create(request.getFirstName(), request.getLastName(), request.getEmail(), request.getPassword());
 
         CreateAccountResponse response = new CreateAccountResponse();
         response.setVerificationCode(account.getVerificationCode());
@@ -24,9 +33,8 @@ public class AccountController {
         return response;
     }
 
-
     @GetMapping("{accountId}")
-    public GetAccountResponse getAccount(String accountId) {
+    public GetAccountResponse getAccount(@PathVariable String accountId) {
         Account account = accountService.get(accountId);
 
         GetAccountResponse response = new GetAccountResponse();
@@ -35,7 +43,28 @@ public class AccountController {
         response.setLastName(account.getLastName());
         response.setUsername(account.getUsername());
         response.setRegisterDate(account.getCreationDate());
+        response.setAccountId(account.getId());
 
         return response;
     }
+
+    @GetMapping
+    public List<GetAccountResponse> getAllAccounts() {
+        List<GetAccountResponse> responseList = new ArrayList<>();
+
+        for (Account account : accountService.getAll()) {
+            GetAccountResponse response = new GetAccountResponse();
+            response.setBalance(account.getBalance());
+            response.setFirstName(account.getFirstName());
+            response.setLastName(account.getLastName());
+            response.setUsername(account.getUsername());
+            response.setRegisterDate(account.getCreationDate());
+            response.setAccountId(account.getId());
+
+            responseList.add(response);
+        }
+
+        return responseList;
+    }
+
 }

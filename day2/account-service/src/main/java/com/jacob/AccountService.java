@@ -43,6 +43,11 @@ public class AccountService {
 
         return null;
     }
+
+    public List<Account> getAll() {
+        return accounts;
+    }
+
 //
 //    public void update() {
 //
