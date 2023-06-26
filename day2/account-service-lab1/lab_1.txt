@@ -1,0 +1,44 @@
+Spring Boot | Laboratory 1
+
+ID Generator Service
+1. Create `IdGeneratorService` with `generateRandomCharacters(int length)` and `getNextId()`. Make this a spring bean.
+2. Use `generateRandomCharacters` for generating verificationCode (size: 6)
+3. Use `getNextId()` for generating accountId.
+4. For #2, you can base here: https://www.baeldung.com/java-random-string (#8)
+    @Test
+    public void givenUsingApache_whenGeneratingRandomAlphanumericString_thenCorrect() {
+        String generatedString = RandomStringUtils.randomAlphanumeric(10);
+
+        System.out.println(generatedString);
+    }
+
+    Add the following dependency:
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.12.0</version>
+    </dependency>
+
+Update account
+1. Create an ReST API to update an acount. Here's the design:
+    PUT /account/<accountid>
+    Header -- Content-Type: application/json
+    {
+        //reuse CreateAccountRequest
+    }
+
+    NOTE: `PUT` means OVERIDING the whole resource with id <accountid>, PATCH means you are attempting to update the field/s in the body
+2. Response is:
+    200 OK
+    {
+        "lastUpdate": <last date updated>
+    }
+
+Delete account
+1. Create an ReST API to delete an acount. Here's the design:
+    PUT /account/<accountid>
+2. Response is:
+    204 NO CONTENT
+
+
+All are happy flow. No validation. So have an extra caution with invalid inputs like account is not yet regsitered.
