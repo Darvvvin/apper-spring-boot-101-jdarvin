@@ -14,8 +14,9 @@ public class AccountService {
 
     public Account create(String firstName, String lastName, String username, String clearPassword) {
         Account account = new Account();
+        IdGeneratorService idGenerator = new IdGeneratorService();
 
-        String id = UUID.randomUUID().toString();
+        String id = idGenerator.getNextId();
         System.out.println("Generated id: " + id);
 
         account.setId(id);
@@ -29,7 +30,7 @@ public class AccountService {
         account.setLastName(lastName);
         account.setUsername(username);
         account.setClearPassword(clearPassword);
-        account.setVerificationCode("QW345T");
+        account.setVerificationCode(idGenerator.generateRandomCharacters(6));
 
         accounts.add(account);
 
