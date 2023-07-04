@@ -24,7 +24,7 @@ public class UserApi {
             throw new InvalidUserAgeException("age must be at least 15 yrs old");
         }
 
-        return new CreateUserResponse("RANDOM_STRING");
+        return new CreateUserResponse();
 
         // Compute age. Review LocalDate
         // if age is below 15, throw an InvalidUserAgeException(you must create this exception)
