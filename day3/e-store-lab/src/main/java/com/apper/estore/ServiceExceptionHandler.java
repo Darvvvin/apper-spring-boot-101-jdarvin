@@ -24,10 +24,6 @@ public class ServiceExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ServiceError handleInvalidUserAgeException(InvalidUserAgeException ex) {
-        if(ex.getMessage().equals("age must be at least 15 yrs old")) {
-            return new ServiceError("age must be at least 15 yrs old");
-        } else {
-            return new ServiceError("Unknown invalid argument encountered");
-        }
+        return new ServiceError(ex.getMessage());
     }
 }
