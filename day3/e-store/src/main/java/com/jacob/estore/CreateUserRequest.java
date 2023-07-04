@@ -30,6 +30,6 @@ public class CreateUserRequest {
 
     @JsonProperty("birth_date")
     @NotBlank(message = "birth_date is required")
-    @Pattern(regexp = "[0-9]{4}-[0-9]{2}-[0-9]{2}")
+    @Pattern(regexp = "[0-9]{4}-[0-9]{2}-[0-9]{2}") // YYYY-MM-DD
     private String birthDate;
 }

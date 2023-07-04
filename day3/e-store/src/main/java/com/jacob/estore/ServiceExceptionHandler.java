@@ -18,4 +18,10 @@ public class ServiceExceptionHandler {
                 .map(objectError -> new ServiceError(objectError.getDefaultMessage()))
                 .orElse(new ServiceError("Unknown invalid argument encountered"));
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ServiceError handleInvalidUserAgeException(InvalidUserAgeException ex) {
+        return new ServiceError("age must be at least 15 yrs old");
+    }
 }
