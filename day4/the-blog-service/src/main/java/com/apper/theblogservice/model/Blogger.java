@@ -1,8 +1,13 @@
 package com.apper.theblogservice.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
 import lombok.Data;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 
@@ -10,6 +15,7 @@ import java.time.LocalDateTime;
 @Table(name = "BLOGGER")
 @Data
 public class Blogger {
+
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -31,4 +37,5 @@ public class Blogger {
     public void setCreatedAt() {
         createdAt = LocalDateTime.now();
     }
+
 }

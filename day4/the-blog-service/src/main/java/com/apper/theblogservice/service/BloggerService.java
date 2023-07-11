@@ -19,6 +19,8 @@ public class BloggerService {
         blogger.setName(name);
         blogger.setPassword(password);
 
+        // long-running functions in between
+
         return bloggerRepository.save(blogger);
     }
 
