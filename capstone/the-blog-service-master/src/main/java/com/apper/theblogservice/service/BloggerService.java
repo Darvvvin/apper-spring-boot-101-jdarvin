@@ -30,4 +30,9 @@ public class BloggerService {
         return bloggerResult.get();
     }
 
+    // Check if email exists
+    public boolean getBloggerByEmail(String email) {
+        return bloggerRepository.existsByEmail(email);
+    }
+
 }

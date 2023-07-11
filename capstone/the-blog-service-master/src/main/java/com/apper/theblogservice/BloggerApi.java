@@ -1,5 +1,6 @@
 package com.apper.theblogservice;
 
+import com.apper.theblogservice.exception.EmailAlreadyExistsException;
 import com.apper.theblogservice.model.Blogger;
 import com.apper.theblogservice.payload.BloggerDetails;
 import com.apper.theblogservice.payload.CreateBloggerRequest;
@@ -27,8 +28,14 @@ public class BloggerApi {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateBloggerResponse createBlogger(@RequestBody @Valid CreateBloggerRequest request) {
+    public CreateBloggerResponse createBlogger(@RequestBody @Valid CreateBloggerRequest request) throws EmailAlreadyExistsException {
         System.out.println(request);
+
+        // Check if email exists
+        if (bloggerService.getBloggerByEmail(request.getEmail())) {
+            throw new EmailAlreadyExistsException("Email already exists");
+        }
+        // Check if email exists
 
         Blogger createdBlogger = bloggerService.createBlogger(request.getEmail(), request.getName(), request.getPassword());
 
