@@ -11,7 +11,7 @@ public class CreateBloggerRequest {
     @Email(message = "Invalid email format")
     private String email;
 
-    @NotBlank(message = "`first_name` is required")
+    @NotBlank(message = "`name` is required")
     private String name;
 
     @Size(min = 8, message = "`password` must be at least 8 characters")
