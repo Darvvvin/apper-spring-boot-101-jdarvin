@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 public class ServiceExceptionHandler {
-
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
     @ResponseBody
@@ -16,4 +15,10 @@ public class ServiceExceptionHandler {
         return new ServiceError(ex.getMessage());
     }
 
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public ServiceError handleIdDoesNotExistException(IdDoesNotExistException ex) {
+        return new ServiceError(ex.getMessage());
+    }
 }

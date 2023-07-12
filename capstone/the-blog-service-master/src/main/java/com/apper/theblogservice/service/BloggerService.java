@@ -35,4 +35,7 @@ public class BloggerService {
         return bloggerRepository.existsByEmail(email);
     }
 
+    // Check if id exists
+    public boolean checkIfBloggerIdExists(String id) { return bloggerRepository.existsById(id); }
+
 }

@@ -1,6 +1,7 @@
 package com.apper.theblogservice;
 
 import com.apper.theblogservice.exception.EmailAlreadyExistsException;
+import com.apper.theblogservice.exception.IdDoesNotExistException;
 import com.apper.theblogservice.model.Blogger;
 import com.apper.theblogservice.payload.BloggerDetails;
 import com.apper.theblogservice.payload.CreateBloggerRequest;
@@ -47,7 +48,13 @@ public class BloggerApi {
     }
 
     @GetMapping("{id}")
-    public BloggerDetails getBlogger(@PathVariable String id) {
+    public BloggerDetails getBlogger(@PathVariable String id) throws IdDoesNotExistException {
+        // Check if id exists or not
+        if (!bloggerService.checkIfBloggerIdExists(id)) {
+            throw new IdDoesNotExistException("User does not exist");
+        }
+        // Check if id exists or not
+
         Blogger blogger = bloggerService.getBlogger(id);
 
         BloggerDetails bloggerDetails = new BloggerDetails();
