@@ -1,9 +1,12 @@
 package com.apper.theblogservice.service;
 
 import com.apper.theblogservice.model.Blogger;
+import com.apper.theblogservice.payload.BloggerDetails;
 import com.apper.theblogservice.repository.BloggerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,12 +33,12 @@ public class BloggerService {
         return bloggerResult.get();
     }
 
-    // Check if email exists
-    public boolean getBloggerByEmail(String email) {
-        return bloggerRepository.existsByEmail(email);
+    public Iterable<Blogger> getAllBloggers() {
+        return bloggerRepository.findAll();
     }
 
-    // Check if id exists
+    public boolean checkIfBloggerEmailExists(String email) { return bloggerRepository.existsByEmail(email); }
+
     public boolean checkIfBloggerIdExists(String id) { return bloggerRepository.existsById(id); }
 
 }

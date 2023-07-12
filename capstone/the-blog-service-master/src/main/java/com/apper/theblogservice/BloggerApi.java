@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("blogger")
 public class BloggerApi {
@@ -33,10 +35,9 @@ public class BloggerApi {
         System.out.println(request);
 
         // Check if email exists
-        if (bloggerService.getBloggerByEmail(request.getEmail())) {
+        if (bloggerService.checkIfBloggerEmailExists(request.getEmail())) {
             throw new EmailAlreadyExistsException("Email already exists");
         }
-        // Check if email exists
 
         Blogger createdBlogger = bloggerService.createBlogger(request.getEmail(), request.getName(), request.getPassword());
 
@@ -49,11 +50,10 @@ public class BloggerApi {
 
     @GetMapping("{id}")
     public BloggerDetails getBlogger(@PathVariable String id) throws IdDoesNotExistException {
-        // Check if id exists or not
+
         if (!bloggerService.checkIfBloggerIdExists(id)) {
             throw new IdDoesNotExistException("User does not exist");
         }
-        // Check if id exists or not
 
         Blogger blogger = bloggerService.getBlogger(id);
 
@@ -64,6 +64,11 @@ public class BloggerApi {
         bloggerDetails.setDateRegistration(blogger.getCreatedAt());
 
         return bloggerDetails;
+    }
+
+    @GetMapping
+    public Iterable<Blogger> getAllBloggerDetails() {
+        return bloggerService.getAllBloggers();
     }
 
 }
