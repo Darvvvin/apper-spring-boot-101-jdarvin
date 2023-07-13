@@ -37,7 +37,7 @@ public class BlogApi {
     }
 
     @PutMapping("{id}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public UpdateBlogResponse updateBlog(@RequestBody @Valid UpdateBlogRequest request, @PathVariable String id) {
 
         System.out.println(request);
