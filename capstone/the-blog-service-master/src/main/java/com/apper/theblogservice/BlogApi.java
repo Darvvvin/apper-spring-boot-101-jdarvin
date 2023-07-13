@@ -1,5 +1,6 @@
 package com.apper.theblogservice;
 
+import com.apper.theblogservice.exception.BlogDoesNotExistException;
 import com.apper.theblogservice.model.Blog;
 import com.apper.theblogservice.payload.*;
 import com.apper.theblogservice.service.BlogService;
@@ -34,8 +35,12 @@ public class BlogApi {
     }
 
     @PutMapping("{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public UpdateBlogResponse updateBlog(@RequestBody @Valid UpdateBlogRequest request, @PathVariable String id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public UpdateBlogResponse updateBlog(@RequestBody @Valid UpdateBlogRequest request, @PathVariable String id) throws BlogDoesNotExistException {
+
+        if(!blogService.checkIfBlogExists(id)) {
+            throw new BlogDoesNotExistException("Blog does not exist!");
+        }
 
         System.out.println(request);
 
@@ -51,8 +56,13 @@ public class BlogApi {
         return response;
     }
 
-    @GetMapping("{id}") // TODO Throw exception
-    public BlogDetails getBlog(@PathVariable String id) {
+    @GetMapping("{id}")
+    public BlogDetails getBlog(@PathVariable String id) throws BlogDoesNotExistException {
+
+        if(!blogService.checkIfBlogExists(id)) {
+            throw new BlogDoesNotExistException("Blog does not exist!");
+        }
+
         Blog blog = blogService.getBlog(id);
 
         BlogDetails blogDetails = new BlogDetails();

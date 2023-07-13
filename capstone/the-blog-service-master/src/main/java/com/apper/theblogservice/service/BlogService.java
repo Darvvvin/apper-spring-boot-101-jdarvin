@@ -50,4 +50,7 @@ public class BlogService {
     public Iterable<Blog> getAllBlogsByBloggerId(String bloggerId) {
         return blogRepository.findAllByBloggerId(bloggerId);
     }
+
+    public boolean checkIfBlogExists(String id) { return blogRepository.existsById(id); }
+
 }

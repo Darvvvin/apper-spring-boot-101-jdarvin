@@ -21,4 +21,11 @@ public class ServiceExceptionHandler {
     public ServiceError handleIdDoesNotExistException(IdDoesNotExistException ex) {
         return new ServiceError(ex.getMessage());
     }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public ServiceError handleBlogDoesNotExistException(BlogDoesNotExistException ex) {
+        return new ServiceError(ex.getMessage());
+    }
 }
