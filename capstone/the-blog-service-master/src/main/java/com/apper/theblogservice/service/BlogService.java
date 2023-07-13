@@ -19,4 +19,18 @@ public class BlogService {
 
         return blogRepository.save(blog);
     }
+
+    public Blog updateBlog(String title, String body, String blogId) {
+        Blog blog = new Blog();
+
+        blog.setTitle(title);
+        blog.setBody(body);
+        blog.setId(blogId);
+
+        // Retain create and blogger id
+        blog.setCreatedAt(blogRepository.findById(blogId).get().getCreatedAt());
+        blog.setBloggerId(blogRepository.findById(blogId).get().getBloggerId());
+
+        return blogRepository.save(blog);
+    }
 }
