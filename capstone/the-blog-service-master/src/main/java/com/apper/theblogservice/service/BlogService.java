@@ -46,4 +46,8 @@ public class BlogService {
     public Iterable<Blog> getAllBlogs() {
         return blogRepository.findAll();
     }
+
+    public Iterable<Blog> getAllBlogsByBloggerId(String bloggerId) {
+        return blogRepository.findAllByBloggerId(bloggerId);
+    }
 }

@@ -68,4 +68,9 @@ public class BlogApi {
 
     @GetMapping
     public Iterable<Blog> getAllBlogDetails() {return blogService.getAllBlogs();}
+
+    @GetMapping("blogger/{id}")
+    public Iterable<Blog> getAllBlogDetailsByBloggerId(@PathVariable String id) {
+        return blogService.getAllBlogsByBloggerId(id);
+    }
 }
