@@ -1,10 +1,7 @@
 package com.apper.theblogservice;
 
 import com.apper.theblogservice.model.Blog;
-import com.apper.theblogservice.payload.CreateBlogRequest;
-import com.apper.theblogservice.payload.CreateBlogResponse;
-import com.apper.theblogservice.payload.UpdateBlogRequest;
-import com.apper.theblogservice.payload.UpdateBlogResponse;
+import com.apper.theblogservice.payload.*;
 import com.apper.theblogservice.service.BlogService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -54,4 +51,18 @@ public class BlogApi {
         return response;
     }
 
+    @GetMapping("{id}") // TODO Throw exception
+    public BlogDetails getBlog(@PathVariable String id) {
+        Blog blog = blogService.getBlog(id);
+
+        BlogDetails blogDetails = new BlogDetails();
+
+        blogDetails.setBloggerId(blog.getBloggerId());
+        blogDetails.setTitle(blog.getTitle());
+        blogDetails.setBody(blog.getBody());
+        blogDetails.setCreatedAt(blog.getCreatedAt());
+        blogDetails.setUpdatedAt(blog.getLastUpdate());
+
+        return blogDetails;
+    }
 }

@@ -58,6 +58,7 @@ public class BloggerApi {
         Blogger blogger = bloggerService.getBlogger(id);
 
         BloggerDetails bloggerDetails = new BloggerDetails();
+
         bloggerDetails.setId(blogger.getId());
         bloggerDetails.setName(blogger.getName());
         bloggerDetails.setEmail(blogger.getEmail());

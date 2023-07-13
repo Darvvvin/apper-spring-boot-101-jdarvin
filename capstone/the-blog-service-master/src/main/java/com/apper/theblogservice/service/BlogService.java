@@ -1,8 +1,11 @@
 package com.apper.theblogservice.service;
 
 import com.apper.theblogservice.model.Blog;
+import com.apper.theblogservice.model.Blogger;
 import com.apper.theblogservice.repository.BlogRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class BlogService {
@@ -32,5 +35,11 @@ public class BlogService {
         blog.setBloggerId(blogRepository.findById(blogId).get().getBloggerId());
 
         return blogRepository.save(blog);
+    }
+
+    public Blog getBlog(String id) {
+        Optional<Blog> blogResult = blogRepository.findById(id);
+
+        return blogResult.get();
     }
 }
