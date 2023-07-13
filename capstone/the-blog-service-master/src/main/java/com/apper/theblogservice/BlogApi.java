@@ -34,7 +34,7 @@ public class BlogApi {
     }
 
     @PutMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public UpdateBlogResponse updateBlog(@RequestBody @Valid UpdateBlogRequest request, @PathVariable String id) {
 
         System.out.println(request);
@@ -65,4 +65,7 @@ public class BlogApi {
 
         return blogDetails;
     }
+
+    @GetMapping
+    public Iterable<Blog> getAllBlogDetails() {return blogService.getAllBlogs();}
 }

@@ -42,4 +42,8 @@ public class BlogService {
 
         return blogResult.get();
     }
+
+    public Iterable<Blog> getAllBlogs() {
+        return blogRepository.findAll();
+    }
 }
